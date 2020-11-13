@@ -1,0 +1,9 @@
+<div class="diagram-pane" (mousedown)="onmousedown()" (mouseup)="onmouseup()" (mousemove)="onmousemove($event)"
+    (mousewheel)="onmousewheel($event)">
+    <div class="diagram-paning-container" [style.transform]="paneTransform">
+        <div *ngIf="nodes" class="diagram-roots-elements">
+            <tam-diagram-node [nodeId]="node.guid" class="diagram-root diagram-node" (mousedown)="preventMouse($event)"
+                *ngFor="let node of nodes.roots"></tam-diagram-node>
+        </div>
+    </div>
+</div>

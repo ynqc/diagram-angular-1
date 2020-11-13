@@ -1,0 +1,41 @@
+:host {
+    -webkit-print-color-adjust: exact;
+    position: relative;
+    display: block;
+    -webkit-touch-callout: none;
+    user-select: none;
+    overflow: hidden;
+    height: 100vh;
+    text-align: center;
+  }
+  
+.diagram-roots-elements {
+    position: relative;
+    text-align: center;
+    display: inline-block;
+    white-space: nowrap;
+    cursor: default;
+    font-size: 0;
+    transform-origin: center;
+}
+  
+.diagram-tree-node {
+    position: relative;
+    display: inline-block;
+    margin: 15px;
+    vertical-align: top;
+    &:only-of-type {
+        > .line-to {
+            display: block;
+        }
+    }
+}
+  
+.diagram-pane,.diagram-paning-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+  

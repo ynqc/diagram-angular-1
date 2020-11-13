@@ -1,0 +1,36 @@
+<div class="line-to"></div>
+<div id="diagram-node-{{ node.guid }}" [ngClass]="{
+    'diagram-element-container': true,
+    'diagram-element-has-children': node.hasChildren()
+  }" [style.width.px]="node.width" [style.height.px]="node.height">
+    <div [ngClass]="{
+      'diagram-element-main': true,
+      dragover: node.isDragover,
+      expanded: node.isExpanded,
+      dragging: node.isDragging,
+      'diagram-new-node': node.isMaker
+    }" [attr.draggable]="node.isMaker ? null : 'true'" [style.width.px]="node.width" [style.height.px]="node.height"
+        (drop)="node.drop($event)" (dragenter)="node.dragenter($event)" (dragstart)="node.dragstart($event)"
+        (dragover)="node.dragover($event)" (dragend)="node.dragend()" (dragleave)="node.dragleave($event)">
+        <div class="rect" [style.width.px]="node.width" [style.height.px]="node.height">
+            <div class="buttons">
+                <div class="delete" (click)="node.destroy()"></div>
+                <div class="toggler" (click)="node.toggle()"></div>
+                <div class="add" (click)="node.addChild()"></div>
+            </div>
+            <div class="diagram-text diagram-text-non-editable">
+                <span>{{ node.displayName }}</span>
+            </div>
+            <div class="diagram-text diagram-text-editable">
+                <span contenteditable [innerHtml]="node.displayName" (blur)="onNodeBlur($event, node.guid)"></span>
+                <span class="children-count"> ({{ node.childrenCount() }})</span>
+            </div>
+        </div>
+    </div>
+    <div class="diagram-children" [style.transform]="childrenTransform" *ngIf="node.isExpanded">
+        <div class="diagram-elements-group">
+            <tam-diagram-node *ngFor="let child of node.children" [nodeId]="child" class="diagram-node diagram-child">
+            </tam-diagram-node>
+        </div>
+    </div>
+</div>
